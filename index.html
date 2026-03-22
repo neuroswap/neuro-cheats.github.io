@@ -1,144 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neuro-Shop</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Font Awesome for YouTube icon -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <style>
-    /* RESET & BODY */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Poppins', sans-serif; background:#0f0f0f; color:white; overflow:hidden; height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center; cursor:none; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neuro-Shop</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<style>
+  /* RESET & BODY */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Poppins', sans-serif; background:#0f0f0f; color:white; overflow:hidden; height:100vh; display:flex; justify-content:center; align-items:flex-start; text-align:center; cursor:none; }
 
-    /* CONTAINER */
-    .container { max-width:700px; z-index:2; position:relative; }
+  /* LAYOUT */
+  .main-content { display:flex; flex-wrap:wrap; justify-content:center; gap:40px; width:90%; max-width:1100px; margin-top:40px; z-index:2; position:relative; }
+  .text-section { flex:1 1 350px; }
+  .video-section { flex:1 1 350px; }
 
-    h1 { font-size:3rem; margin-bottom:20px; color:#fff; }
-    p { font-size:1.2rem; margin-bottom:40px; color:#aaa; }
+  h1 { font-size:2.8rem; margin-bottom:15px; color:#fff; }
+  p { font-size:1.2rem; margin-bottom:30px; color:#aaa; }
 
-    /* BUTTONS */
-    .btn {
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:15px 30px; font-size:1.2rem; font-weight:600;
-      border-radius:12px; cursor:pointer; text-decoration:none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
+  /* BUTTONS */
+  .btn {
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    padding:15px 30px; font-size:1.2rem; font-weight:600;
+    border-radius:12px; cursor:pointer; text-decoration:none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 
-    .yt-btn { background:linear-gradient(90deg,#FF0000,#cc0000); color:white; }
-    .yt-btn:hover { transform:scale(1.05); box-shadow:0 0 15px #FF0000; }
+  .yt-btn { background:linear-gradient(90deg,#FF0000,#cc0000); color:white; }
+  .yt-btn:hover { transform:scale(1.05); box-shadow:0 0 15px #FF0000; }
 
-    .xeno-btn { background:linear-gradient(90deg,#00ffff,#0077ff); color:#fff; }
-    .xeno-btn:hover { transform:scale(1.05); box-shadow:0 0 15px #00ffff; }
+  .xeno-btn { background:linear-gradient(90deg,#00ffff,#0077ff); color:#fff; }
+  .xeno-btn:hover { transform:scale(1.05); box-shadow:0 0 15px #00ffff; }
 
-    .script-btn { background:linear-gradient(90deg,#ff00ff,#ff0077); color:#fff; }
-    .script-btn:hover { transform:scale(1.05); box-shadow:0 0 15px #ff00ff; }
+  .script-btn { background:linear-gradient(90deg,#ff00ff,#ff0077); color:#fff; }
+  .script-btn:hover { transform:scale(1.05); box-shadow:0 0 15px #ff00ff; }
 
-    /* COPIED MESSAGE */
-    #copied-msg {
-      position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
-      background: linear-gradient(90deg,#00f0ff,#7a00ff);
-      padding:10px 20px; border-radius:10px; color:#fff;
-      opacity:0; transition:opacity 0.3s;
-      z-index:3;
-    }
+  /* COPIED MESSAGE */
+  #copied-msg {
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+    background: linear-gradient(90deg,#00f0ff,#7a00ff);
+    padding:10px 20px; border-radius:10px; color:#fff;
+    opacity:0; transition:opacity 0.3s; z-index:3;
+  }
 
-    /* CUSTOM CURSOR */
-    .cursor { position:absolute; width:10px; height:10px; background:#fff; border-radius:50%; pointer-events:none; mix-blend-mode: difference; }
+  /* CUSTOM CURSOR */
+  .cursor { position:absolute; width:10px; height:10px; background:#fff; border-radius:50%; pointer-events:none; mix-blend-mode: difference; }
 
-    /* PARTICLE BACKGROUND */
-    canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; }
-  </style>
+  /* VIDEO BOX */
+  .video-container {
+    width:100%;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0px 0px 20px rgba(0,0,0,0.4);
+  }
+  .video-container iframe {
+    width:100%;
+    height:200px;
+  }
+
+  /* BACKGROUND PARTICLES */
+  canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; }
+</style>
 </head>
 <body>
 
-  <!-- CONTAINER -->
-  <div class="container">
-    <h1>Welcome to Neuro-Shop</h1>
-    <p>Check out our YouTube and tools below!</p>
+  <div class="main-content">
 
-    <a class="btn yt-btn" href="https://www.youtube.com/@zay-bear-185" target="_blank">
-      <i class="fab fa-youtube"></i> Visit YouTube
-    </a>
-    <br><br>
-    <a class="btn xeno-btn" href="https://xeno.onl" target="_blank">
-      Xeno Click Me
-    </a>
-    <br><br>
-    <button class="btn script-btn" id="copyScriptBtn">
-      Rivals Cheat (script)
-    </button>
+    <!-- TEXT + BUTTONS -->
+    <div class="text-section">
+      <h1>Welcome to Neuro-Shop</h1>
+      <p>Check out our YouTube tutorial below and use the tools!</p>
+
+      <a class="btn yt-btn" href="https://www.youtube.com/@zay-bear-185" target="_blank">
+        <i class="fab fa-youtube"></i> Visit YouTube
+      </a>
+      <br><br>
+
+      <a class="btn xeno-btn" href="https://xeno.onl" target="_blank">
+        Xeno
+      </a>
+      <br><br>
+
+      <button class="btn script-btn" id="copyScriptBtn">
+        Rivals Cheat (script)
+      </button>
+    </div>
+
+    <!-- VIDEO EMBED -->
+    <div class="video-section">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/XrJQgnGcZxk"
+                title="YouTube Tutorial"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+    </div>
+
   </div>
 
-  <!-- COPIED MESSAGE -->
+  <!-- COPIED TO CLIP MESSAGE -->
   <div id="copied-msg">Copied to clipboard!</div>
 
   <!-- CUSTOM CURSOR -->
   <div class="cursor" id="customCursor"></div>
 
-  <!-- PARTICLE BACKGROUND -->
+  <!-- BACKGROUND PARTICLES -->
   <canvas id="bgCanvas"></canvas>
 
-  <!-- SCRIPT -->
-  <script>
-    // Copy to clipboard functionality
-    const copyBtn = document.getElementById('copyScriptBtn');
-    const copiedMsg = document.getElementById('copied-msg');
+<script>
+  // ===== Copy Script to Clipboard =====
+  const copyBtn = document.getElementById('copyScriptBtn');
+  const copiedMsg = document.getElementById('copied-msg');
+  const scriptText = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/zay-bear-185/NeuroSwap-hub/refs/heads/main/neuroswap.lua",true))()';
 
-    const textToCopy = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/zay-bear-185/NeuroSwap-hub/refs/heads/main/neuroswap.lua",true))()';
-
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        copiedMsg.style.opacity = 1;
-        setTimeout(() => copiedMsg.style.opacity = 0, 1500);
-      });
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(scriptText).then(() => {
+      copiedMsg.style.opacity = 1;
+      setTimeout(() => copiedMsg.style.opacity = 0, 1500);
     });
+  });
 
-    // Custom cursor
-    const cursor = document.getElementById('customCursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX - 5 + 'px';
-      cursor.style.top = e.clientY - 5 + 'px';
+  // ===== Cursor =====
+  const cursor = document.getElementById('customCursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX - 5 + 'px';
+    cursor.style.top = e.clientY - 5 + 'px';
+  });
+
+  // ===== Particle Background =====
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+  for (let i = 0; i < 120; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      size: Math.random() * 2 + 1
     });
+  }
 
-    // Particle background
-    const canvas = document.getElementById('bgCanvas');
-    const ctx = canvas.getContext('2d');
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+  });
+</script>
 
-    let particles = [];
-    for(let i=0;i<100;i++){
-      particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        vx: (Math.random()-0.5)*0.5,
-        vy: (Math.random()-0.5)*0.5,
-        size: Math.random()*2+1
-      });
-    }
-
-    function animate(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      particles.forEach(p=>{
-        p.x += p.vx; p.y += p.vy;
-        if(p.x<0||p.x>canvas.width) p.vx*=-1;
-        if(p.y<0||p.y>canvas.height) p.vy*=-1;
-        ctx.fillStyle = '#fff';
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-        ctx.fill();
-      });
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-  </script>
 </body>
 </html>
